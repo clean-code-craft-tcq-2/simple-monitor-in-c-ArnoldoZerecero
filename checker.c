@@ -53,10 +53,16 @@ int chargeRateIsAboveLimit(float chargeRate)
 }
 
 int batteryIsOk(float temperature, float soc, float chargeRate) {
-    int result = 1;
-    if (!temperatureIsInRange(temperature) || !stateOfChargeIsInRange(soc) || !chargeRateIsAboveLimit(chargeRate))
+    int result = 0;
+    if (temperatureIsInRange(temperature))
     {
-        result = 0;
+        if (stateOfChargeIsInRange(soc))
+        {
+            if (chargeRateIsAboveLimit(chargeRate))
+            {
+                result = 1;
+            }
+        }
     }
     return result;
 }
